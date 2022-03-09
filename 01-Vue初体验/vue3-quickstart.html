@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Vue3实现简单的计数器</title>
 </head>
 
 <body>
     <div id="root">
-        <h2>{{content}}</h2>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
@@ -25,6 +24,7 @@
                     this.$data.content += 1
                 },1000)
             },
+            template:`<h2>{{content}}</h2>`
         }).mount('#root');
     </script>
 </body>
