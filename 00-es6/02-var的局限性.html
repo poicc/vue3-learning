@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>var局限性</title>
+</head>
+
+<body>
+    <button>测试按钮1</button>
+    <button>测试按钮2</button>
+    <button>测试按钮3</button>
+    <script>
+        var btns = document.getElementsByTagName('button')
+        // for循环没有作用域，当for完成监听时，i已经是3了
+        // for (var i = 0; i < btns.length; i++) {
+        //     btns[i].onclick = function () {
+        //         console.log("点击了第" + i + 1 + "个按钮")
+        //     }
+        // }
+
+
+        // let定义的变量自带块级作用域
+        // 解决方式一:将var改成let
+        // for (let i = 0; i < btns.length; i++) {
+        //     btns[i].onclick = function () {
+        //         console.log("点击了第" + i + 1 + "个按钮")
+        //     }
+        // }
+
+
+        // 解决方式二:闭包方式解决
+        for (var i = 0; i < btns.length; i++) {
+            (function (i) {
+                btns[i].onclick = function () {
+                    console.log("点击了第" + i + 1 + "个按钮")
+                }
+            })(i)
+        }
+    </script>
+
+</body>
+
+</html>

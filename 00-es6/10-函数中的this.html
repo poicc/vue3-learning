@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数中的this</title>
+</head>
+
+<body>
+
+    <script>
+        // 函数中的this,谁调用函数,函数中的this就指向谁
+        // 非严格模式下,this指向window全局对象
+        function test1 () {
+            return this
+        }
+        console.log(test1 == window)
+        console.log(window.test1() == window)
+
+        // 严格模式下,this指针为undefined,严格模式,是js更严谨、更安全的一种发展方向
+        function test2 () {
+            // 使用严格模式
+            "use strict"
+            return this
+
+        }
+        console.log(test2())
+        console.log(window.test2() == window);
+
+    </script>
+
+</body>
+
+</html>
