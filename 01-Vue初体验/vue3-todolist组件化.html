@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-todolist组件化</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    inputValue: '',
+                    list: []
+                }
+            },
+            methods: {
+                handleAddItem() {
+                    this.list.push(this.inputValue)
+                    this.inputValue = ''
+                }
+            },
+            template: `
+            <div>
+                <input v-model="inputValue"/>
+                <button @click="handleAddItem" :title="inputValue">增加</button>
+                <ul>
+                    <todo-item v-for="(item,index) in list" :content="item" :index="index"/>
+                </ul>
+            </div>
+            `
+        })
+        app.component('todo-item',{
+            props: ['content',"index"],
+            template: '<li>{{index}}----{{content}}</li>'
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>
