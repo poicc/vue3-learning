@@ -1,3 +1,4 @@
+//Array.from()可以将类似数组的对象和可遍历的对象(如:ES6的Set)转换为数组
 let playerObje = { "0": "curry", "1": "james", "2": "kobe", length: 3 }
 let players = Array.from(playerObje)
 // [ 'curry', 'james', 'kobe' ]

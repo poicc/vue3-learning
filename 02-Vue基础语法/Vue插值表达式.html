@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue插值表达式</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 用插值直接显示变量 -->
+        <p>{{firstName}} {{lastName}}</p>
+        <!-- 使用.访问变量的属性 -->
+        <p>{{firstName.length}}</p>
+        <!-- 字符串的拼接 -->
+        <p>{{firstName + '-----' + lastName}}</p>
+        简单的算术运算、
+        <p>{{count * 2}}</p>
+        <!-- 三目运算 -->
+        <p>{{firstName === 'Stephen' ? 'yeah' : 'no'}}</p>
+        <!-- 调用自定义函数 -->
+        <p>{{customMethod(lastName)}}</p>
+        <!-- 调用JS函数 -->
+        <p>{{Math.floor(Math.random(0,1) * 10)}}</p>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    firstName: 'Stephen',
+                    lastName: 'Curry',
+                    count: 10,
+                    age: '<strong>13</strong>'
+                }
+            },
+            methods: {
+                customMethod(str) {
+                    return str.split('').reverse().join(',')
+                }
+            },
+        })
+        const vm = app.mount('#app')
+    </script>
+</body>
+
+</html>

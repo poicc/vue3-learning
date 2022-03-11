@@ -10,9 +10,11 @@
     <script>
       let players = ['curry', 'james', 'kobe']
       for (index in players) {
+        // 0:curry 1:james 2:kobe
         console.log(index + ':' + players[index])
       }
-      for (player in players) {
+      for (player of players) {
+        //curry james kobe
         console.log(player)
       }
     </script>

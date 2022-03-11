@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue生命周期</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: 'hello world'
+                }
+            },
+            //在Vue实例生成之前会自动执行的函数
+            beforeCreate() {
+                console.log('beforeCreate',this.message)
+            },
+            //在Vue实例生成之后会自动执行的函数
+            created() {
+                //可以访问到this.mmessage
+                console.log('created',this.message)
+            },
+            //在组件内容被渲染到页面之前自动执行的函数
+            beforeMount() {
+                console.log(document.getElementById('app').innerHTML,'beforeMount',this.message)
+            },
+            //在组件内容被渲染到页面之后自动执行的函数
+            mounted() {
+                //app的内容会一起输出
+                console.log(document.getElementById('app').innerHTML,'mounted',this.message)
+            },
+            //当data中数据发生改变前 可以在控制台vm.$data.message = 'aaa'模拟
+            beforeUpdate() {
+                console.log(document.getElementById('app').innerHTML,'beforeUpdate',this.message)
+            },
+            //当data中数据发生改变后
+            updated() {
+                console.log(document.getElementById('app').innerHTML,'updated',this.message)
+            },
+            //当vue应用失效时自动执行的函数 可以通过在控制台执行app.unmount()模拟
+            beforeUnmount() {
+                console.log(document.getElementById('app').innerHTML,'beforeUnmount')
+            },
+            //当vue应用失效且DOM全部销毁后自动执行的函数
+            unmounted() {
+                console.log(document.getElementById('app').innerHTML,'unmounted')
+            },
+        })
+        const vm = app.mount('#app')
+    </script>
+</body>
+</html>

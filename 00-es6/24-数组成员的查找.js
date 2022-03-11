@@ -15,5 +15,5 @@ let findOneIndex = players.findIndex(function (value, index, arr) {
 })
 console.log(findOneIndex)
 // ES6写法
-let isGt30 = players.every((value) => value.age > 30)
-let isContainCu = players.some((value) => value.name.includes("cu"))
+// let isGt30 = players.every((value) => value.age > 30)
+// let isContainCu = players.some((value) => value.name.includes("cu"))
