@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-if和v-show</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 需要高频切换元素隐藏显示 则可以使用v-show 否则使用v-if 因为v-show是设置display:none-->
+        <h2 v-show="boo">{{message}}</h2>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: 'hello world',
+                    boo : true
+                }
+            },
+            methods: {
+                
+            },
+        })
+        const vm = app.mount('#app')
+    </script>
+</body>
+
+</html>

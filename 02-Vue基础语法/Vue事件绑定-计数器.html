@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue计数器</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2 v-cloak>当前counter的值是: {{counter}}</h2>
+        <!-- <button @click="counter++">增加</button>
+        <button @click="counter--">减少</button> -->
+        <!-- <button @click="increasement(step)">增加</button>
+        <button @click="decrease(step*2)">减少</button> -->
+        <button @click="decrease(step,$event)">减少</button>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    counter: 0,
+                    step: 2
+                }
+            },
+            methods: {
+                increasement(n) {
+                    this.counter += n
+                },
+                decrease(n,enevt) {
+                    this.counter -= n
+                    console.log(enevt)
+                }
+            },
+        })
+        const vm = app.mount('#app')
+    </script>
+</body>
+
+</html>

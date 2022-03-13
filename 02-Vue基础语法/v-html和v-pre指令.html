@@ -18,6 +18,9 @@
             <li v-html="age"></li>
             <li v-html="link"></li>
         </ul>
+        <!-- 当希望插值表达式的语法不被解析 {{}}原样输出 则可以使用v-pre -->
+        <div>Vue真有趣,特别是{{message}}表达式</div>
+        <div v-pre>Vue真有趣,特别是{{message}}表达式</div>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
@@ -25,7 +28,8 @@
             data() {
                 return {
                     age: '<strong>13</strong>',
-                    link: '<a href="https://www.baidu.com">百度一下</a>'
+                    link: '<a href="https://www.baidu.com">百度一下</a>',
+                    message: 'Mustache'
                 }
             },
             methods: {
