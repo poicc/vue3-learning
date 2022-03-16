@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>属性变化的侦听</title>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model.lazy="firstName" type="text">
+        <input v-model="lastName" type="text">
+        <h2>全名是：{{fullName}}</h2>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    firstName: "",
+                    lastName: "",
+                    fullName: ""
+                };
+            },
+            component: {
+
+            },
+            watch: {
+                //侦听器的标准语法格式
+                firstName: {
+                    handler(newValue, oldValue) {
+                        console.log(newValue + "----" + oldValue)
+                        this.fullName = this.firstName + " " + this.lastName
+                    },
+                },
+                lastName: function() {
+                    this.fullName = this.firstName + " " + this.lastName
+                }
+            },
+            methods: {
+
+            },
+        });
+        let vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

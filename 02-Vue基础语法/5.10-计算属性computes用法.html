@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="firstName"/>
+        <input type="text" v-model="lastName"/>
+        <!-- 使用计算属性的结果 -->
+        <h2>全名：{{fullName}}</h2>
+        <!-- 使用方法的结果 -->
+        <h2>全名：{{getFullName()}}</h2>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let app = Vue.createApp({
+            data() {
+            return {
+                firstName: "",
+                lastName: ""
+            };
+            },
+            computed: {
+                fullName() {
+                    return this.firstName + this.lastName
+                }
+            },
+            mounted() {
+                
+            },
+            methods: {
+                getFullName() {
+
+                }
+            },
+        });
+        let vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>选择性别</h2>
+        <h3>你的选择是：{{gender}}</h3>
+        <label for="male">男<input value="男" v-model="gender" type="radio" id="male"></label>
+
+        <label for="female">女<input value="女" v-model="gender" type="radio" id="female"></label>
+        <hr />
+        <!-- 复选框 -->
+        <h2>选择技术栈</h2>
+        <h3>你的选择是：{{checks}}</h3>
+        <label for="SpringBoot">
+            <input value="SpringBoot"  v-model="checks" type="checkbox" id="SpringBoot">
+            SpringBoot
+        </label>
+
+        <label for="Vue">
+            <input value="Vue" v-model="checks" type="checkbox" id="Vue">
+            Vue
+        </label>
+
+        <label for="Linux">
+            <input value="Linux" v-model="checks" type="checkbox" id="Linux">
+            Linux
+        </label>
+
+
+        <hr/>
+        <input type="text" placeholder="用户名"/>
+        <input type="text" placeholder="密码"/>
+        <label for="isTy">
+            <input value="是否同意协议" v-model="isTy" type="checkbox" id="isTy">
+        </label>
+        <button :disabled="">登录</button>
+
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    gender: "",
+                    checks: ["SpringBoot"],
+                    isTy: false
+                };
+            },
+            created() {
+
+            },
+            mounted() {
+
+            },
+            methods: {
+
+            },
+        });
+        let vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

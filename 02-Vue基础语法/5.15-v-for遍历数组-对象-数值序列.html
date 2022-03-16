@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>5.15-v-for遍历数组-对象-数值序列</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in players">
+                数组下标:{{index}} --- id:{{item.id}} --- 姓名:{{item.name}} --- 年龄:{{item.age}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(val,key,i) in bestPlayer">
+                {{val}} --- {{key}} --- {{i}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    message: "VUE",
+                    players: [
+                        {id: 1, name: "aaa", age:20},
+                        {id: 2, name: "bbb", age:20},
+                        {id: 3, name: "ccc", age:20},
+                    ],
+                    bestPlayer:{
+                        name: "张三",
+                        age: 33
+                    }
+                };
+            },
+            created() {
+
+            },
+            mounted() {
+
+            },
+            methods: {
+
+            },
+        });
+        let vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

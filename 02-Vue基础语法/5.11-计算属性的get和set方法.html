@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性computed</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model.lazy.trim="fullName" />
+        <h2>firstName是:{{firstName}}</h2>
+        <h2>lastName是:{{lastName}}</h2>
+        <h2>fullName是:{{fullName}}</h2>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    firstName: "",
+                    lastName: ""
+                };
+            },
+            computed: {
+                fullName: {
+                    get() {
+                        return this.firstName + this.lastName
+                    },
+                    set(newValue) {
+                        //set方法接收v-model的输入值
+                        // for(let i = 0;i<newValue.length;i++)
+                        let strArr = newValue.split(' ');
+                        console.log(strArr)
+                        this.firstName = strArr[0]
+                        this.lastName = strArr[1]
+                    }
+                }
+            },
+            mounted() {
+
+            },
+            methods: {
+            },
+        });
+        let vm = app.mount('#app');
+    </script>
+</body>
+
+<html>
