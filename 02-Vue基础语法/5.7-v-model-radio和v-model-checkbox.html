@@ -20,7 +20,7 @@
         <h2>选择技术栈</h2>
         <h3>你的选择是：{{checks}}</h3>
         <label for="SpringBoot">
-            <input value="SpringBoot"  v-model="checks" type="checkbox" id="SpringBoot">
+            <input value="SpringBoot" v-model="checks" type="checkbox" id="SpringBoot">
             SpringBoot
         </label>
 
@@ -35,13 +35,17 @@
         </label>
 
 
-        <hr/>
-        <input type="text" placeholder="用户名"/>
-        <input type="text" placeholder="密码"/>
-        <label for="isTy">
-            <input value="是否同意协议" v-model="isTy" type="checkbox" id="isTy">
-        </label>
-        <button :disabled="">登录</button>
+        <hr />
+        <div><input type="text" placeholder="用户名" /></div>
+        <div><input type="password" placeholder="密码" /></div>
+        <div>
+            <label for="isTy">
+                是否同意协议
+                <input value="isTy" v-model="isTy" type="checkbox" id="isTy">
+            </label>
+            <button :disabled="!isTy" @click="login">登录</button>
+
+        </div>
 
 
     </div>
@@ -63,7 +67,9 @@
 
             },
             methods: {
-
+                login() {
+                    alert('登录成功')
+                }
             },
         });
         let vm = app.mount('#app');
