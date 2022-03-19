@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父子孙组件嵌套</title>
+    <style>
+        body {
+            background-color: #80CBC4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.55);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(5.5px);
+            -webkit-backdrop-filter: blur(5.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            text-align: center;
+        }
+
+        .img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            border: 2px solid #80CBC4;
+            margin-top: 40px;
+        }
+
+        .grandson {
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .btn {
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(19.5px);
+            -webkit-backdrop-filter: blur(19.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <parent></parent>
+    </div>
+
+    <template id="Grandson">
+        <div class="grandson">
+            poicc
+        </div>
+        <div style="margin-top: 20px;">
+            <button class="btn">关注</button>
+            <button class="btn">分享</button>
+        </div>
+    </template>
+
+    <template id="Child">
+        <div>
+            <img class="img" src="https://cdn.jsdelivr.net/gh/1802343228/image@main/avatar.3sylmzwhoqi0.png" />
+            <grandson></grandson>
+        </div>
+    </template>
+
+    <template id="Parent">
+        <div class="card">
+            <child></child>
+        </div>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            components: {
+                Parent: {
+                    template: '#Parent',
+                    components: {
+                        Child: {
+                            template: '#Child',
+                            components: {
+                                Grandson: {
+                                    template: '#Grandson'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        const vm = app.mount('#app');
+    </script>
+</body>
+
+<html>
