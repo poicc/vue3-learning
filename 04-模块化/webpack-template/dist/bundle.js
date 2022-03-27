@@ -1,0 +1,1 @@
+(()=>{var e={507:e=>{e.exports={players:[{name:"aaa",age:20},{name:"bbb",age:20},{name:"ccc",age:20}]}}},a={};function r(o){var t=a[o];if(void 0!==t)return t.exports;var n=a[o]={exports:{}};return e[o](n,n.exports,r),n.exports}(()=>{let e=r(507);console.log(e)})()})();

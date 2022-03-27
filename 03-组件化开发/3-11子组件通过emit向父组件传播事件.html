@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子组件通过emit向父组件传播事件</title>
+</head>
+
+<body>
+    <div id="app">
+        <child @increment="changePCounter" @decrement="changePCounter"></child>
+        <h3>{{ pCounter }}</h3>
+    </div>
+
+    <template id="Child">
+        <div>
+            <button @click="incr">+1</button>
+            <button @click="decr">-1</button>
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        const Child = {
+            template: '#Child',
+            data() {
+                return { cCounter: 0 }
+            },
+            methods: {
+                incr() {
+                    this.cCounter++
+                    this.$emit('increment', this.cCounter)
+                },
+                decr() {
+                    this.cCounter--
+                    this.$emit('decrement', this.cCounter)
+                }
+            }
+        }
+        const vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    pCounter: 0
+                }
+            },
+            methods: {
+                changePCounter(counter) {
+                    this.pCounter = counter
+                }
+            },
+            components: {
+                Child
+            }
+        });
+    </script>
+</body>
+
+<html>

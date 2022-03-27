@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父组件向子组件通过props属性传递数据</title>
+</head>
+
+<body>
+    <div id="app">
+        <child :child-player="player" :child-message="message" :child-req="requires" :child-valid="valid"></child>
+    </div>
+    
+    <template id="Child">
+        <div>
+            <h2>{{childPlayer.name}} --- {{childPlayer.age}}</h2>
+            <h2>{{childMessage}}</h2>
+            <h2>{{childReq}}</h2>
+            <h2>{{childNum}}</h2>
+            <h2>{{childValid}}</h2>
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        const Child = {
+            template: '#Child',
+            props: {
+                // childPlayer: Object,
+                childMessage: [String, Number],
+                //必须是字符串
+                childReq: { type: String, requires: true },
+                //默认值100
+                childNum: { type: Number, default: 100 },
+                childPlayer: {
+                    type: Object,
+                    default: function () {
+                        return { name: '张三' }
+                    }
+                },
+                childValid: {
+                    validator: function (value) {
+                        return value < 3
+                    }
+                }
+
+            }
+        }
+
+        const app = new Vue({
+            el: '#app',
+            components:{
+                Child
+            },
+            data() {
+                return {
+                    player: {
+                        name: '',
+                        age: 12
+                    },
+                    message: '123',
+                    requires: 'sdd',
+                    valid: 2
+                }
+            }
+        })
+    </script>
+</body>
+
+<html>

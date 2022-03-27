@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>云班课登录表单切换</title>
+    <style>
+        body {
+            background-color: #e3e3e3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-border {
+            border: 1px solid #e3e3e3;
+            height: 40px;
+            width: 280px;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .icon {
+            width: 15px;
+            height: 15px;
+        }
+
+        input {
+            border: none;
+            margin-left: 10px;
+            height: 35px;
+            outline: none;
+        }
+
+        .mt-3 {
+            margin-top: 20px;
+        }
+
+        .tab {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+        }
+
+        .col-small {
+            width: 3vw;
+        }
+
+        .change {
+            border-bottom: 4px solid #0DC4DC;
+            border-radius: 2px;
+        }
+
+        .hand {
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .card-container {
+            width: 350px;
+            height: 400px;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+        }
+
+        .forget {
+            font-size: 14px;
+            color: #0DC4DC;
+            cursor: pointer;
+        }
+
+        .btn {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        button {
+            width: 280px;
+            height: 40px;
+            color: #0DC4DC;
+            background-color: #fff;
+            border: 1px solid #0DC4DC;
+        }
+
+        .href {
+            color: #0DC4DC;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="card-container">
+            <div class="tab">
+                <div :class="isLogin ? 'change' : ''" class="hand" @click="isLogin=!isLogin">
+                    账号密码登录
+                </div>
+                <div class="col-small"></div>
+                <div :class="isLogin ? '' : 'change'" class="hand" @click="isLogin=!isLogin">
+                    短信验证登录
+                </div>
+            </div>
+            <login class="form" v-if="isLogin"></login>
+            <register class="form" v-else="isLogin"></register>
+            <div class="auto-login">
+                <div class="col-1"></div>
+                <div class="forget">忘记密码?</div>
+            </div>
+            <div class="btn"><button>登录</button></div>
+            <div class="href">注册蓝墨云账号 | 学校账号密码登录</div>
+        </div>
+
+    </div>
+    <template id="Login">
+        <div>
+            <div class="input-border">
+                <img src="./assets/user.png" class="icon" />
+                <input placeholder="请输入账号" />
+            </div>
+            <div class="input-border mt-3">
+                <img src="./assets/password.png" class="icon" />
+                <input placeholder="密码" type="password" />
+            </div>
+        </div>
+    </template>
+
+    <template id="Register">
+        <div>
+            <div class="input-border">
+                <img src="./assets/user.png" class="icon" />
+                <input placeholder="手机号" />
+            </div>
+            <div class="input-border mt-3">
+                <img src="./assets/password.png" class="icon" />
+                <input placeholder="密码" />
+            </div>
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- <script src="https://unpkg.com/vue@next"></script> -->
+    <script>
+        Vue.component('Login', {
+            template: '#Login'
+        })
+
+        Vue.component('Register', {
+            template: '#Register'
+        })
+
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    isLogin: true,
+                    comName: 'Login'
+                }
+            },
+        });
+        // const vm = app.mount('#app');
+    </script>
+</body>
+
+<html>
+
+<!DOCTYPE html>
+<html lang="en">
