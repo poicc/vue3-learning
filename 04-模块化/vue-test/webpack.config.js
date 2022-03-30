@@ -1,7 +1,12 @@
 const path = require("path")
+const htmlWebpackPlugin = require("html-webpack-plugin")
+const uglifyJsPlugin = require("uglify-webpack-plugin")
+
+//适用于vue Loader版本15以上 需要一下插件支持
+// const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: "./src/main.js",
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
@@ -31,19 +36,24 @@ module.exports = {
                 test: /\.less$/,
                 use: ['style-loader', 'css-loader', 'less-loader'],
             },
-            // {
-            //     test:/\.(png | jpg | gif | jpeg)$/,
-            //     use:[
-            //         "file-loader",
-            //         {
-            //             loader: 'url-loader',
-            //             options: {
-            //                 limit: 1024 * 1024,
-            //                 name: "img/[name]-[hash:8].[ext]"
-            //             }
-            //         }
-            //     ]
-            // }
+            {
+                test: /\.vue$/,
+                use: ['vue-loader']
+            }
         ]
+    },
+    resolve: {
+
+    },
+    plugins:[
+        new htmlWebpackPlugin({
+            template: "index/html"
+        }),
+        new uglifyJsPlugin()
+    ],
+    devServer: {
+        contentBse: "./dist",
+        inline: true,
+        port: 7777
     }
 }
