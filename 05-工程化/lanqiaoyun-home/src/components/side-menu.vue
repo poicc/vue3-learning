@@ -1,17 +1,22 @@
 <template>
-  <!-- 半透明的黑色背景 -->
-  <div v-if="showMenu" class="side-menu__bg" @click="$emit(`bg-click`)"></div>
+  <!-- 半透明黑色背景 -->
+  <transition name="fade">
+    <div v-if="showMenu" class="side-menu__bg" @click="$emit(`bg-click`)" />
+  </transition>
 
-  <!-- 侧边菜单列表 -->
-  <div v-if="showMenu" class="side-menu__list">
-    <div
-      v-for="(menu, index) in menus"
-      :key="index"
-      class="side-menu__list--item"
-    >
-      <a :href="menu.target">{{ menu.title }}</a>
+  <!-- 菜单列表内容 -->
+  <transition name="left-in">
+    <div v-if="showMenu" class="side-menu__list">
+      <!-- 渲染列表数据 -->
+      <div
+        v-for="(menu, index) in menus"
+        :key="`menu-${menu.title}-${index}`"
+        class="side-menu__list--item"
+      >
+        <a :href="menu.target">{{ menu.title }}</a>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -30,7 +35,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 // 背景
 .side-menu__bg {
   width: 100%;

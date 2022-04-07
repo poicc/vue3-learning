@@ -1,17 +1,17 @@
 <template>
   <div class="app">
     <!-- 渲染主页组件 -->
-    <home></home>
+    <HomePage></HomePage>
   </div>
 </template>
 
 <script>
 //引入主页组件
-import Home from './pages/home.vue';
+import HomePage from './pages/HomePage.vue';
 export default {
   name: "App",
   components: {
-    Home
+    HomePage
   }
 };
 </script>
