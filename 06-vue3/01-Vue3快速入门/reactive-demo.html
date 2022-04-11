@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>reactive示例</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>姓名：{{state.name}}</p>
+        <p>职业：{{state.work}}</p>
+        <p>年龄：{{state.age}}</p>
+        <p>getSum:{{ getSum() }}</p>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp, ref, reactive } = Vue;
+        const APP = {
+            setup() {
+                const name = ref("Tom")
+                const num1 = ref(11)
+                const num2 = ref(10)
+                const state = reactive({
+                    name: "张三",
+                    work: "前端工程师",
+                    age: 28
+                })
+
+                setTimeout(() => {
+                    state.name = "张三丰"
+                },2000)
+                
+                const getSum = () => {
+                    return num1.value + num2.value
+                }
+                return {
+                    state,
+                    name,
+                    getSum
+                }
+            },
+        };
+        createApp(APP).mount('#app');
+    </script>
+</body>
+
+<html>

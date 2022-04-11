@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ref示例</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ count }}</p>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp, ref } = Vue;
+        const APP = {
+            setup() {
+                const count = ref(0);
+
+                return {
+                    count
+                }
+            },
+        };
+        createApp(APP).mount('#app');
+    </script>
+</body>
+
+<html>

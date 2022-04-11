@@ -59,6 +59,19 @@ export default {
 
   &--item {
     padding: 30px 10px;
+    a {
+      text-decoration: none;
+      color: #000;
+      font-size: 17px;
+      padding: 15px;
+    }
+    a:hover {
+      // color: rgb(106, 146, 137);
+    }
+
+    a:active {
+      // color: rgb(62, 90, 109);
+    }
   }
 }
 </style>

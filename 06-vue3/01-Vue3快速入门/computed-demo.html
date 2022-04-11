@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed示例</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ text }}</p>
+        <p @click="change">{{ fullName }}</p>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp, computed, reactive } = Vue;
+        const APP = {
+            setup() {
+                const student = reactive({
+                    name: "Java",
+                    info: "企业级开发语言"
+                });
+
+                const person = reactive({
+                    firstName: "张",
+                    lastName: "三"
+                });
+                const text = computed(() => {
+                    console.log("111");
+                    return student.name + student.info
+                })
+
+                //完整语法
+                let fullName = computed({
+                    get() {
+                        return person.firstName + "-" + person.lastName
+                    },
+                    set(value) {
+                        const nameArr = value.split('-')
+                        person.firstName = nameArr[0]
+                        person.lastName = nameArr[1]
+                    }
+                })
+
+                let change = () => {
+                    fullName.value = '李-三'
+                }
+
+                setTimeout(() => {
+                    student.name = "JavaScript"
+                })
+
+                return {
+                    text,
+                    fullName,
+                    change
+                }
+            },
+        };
+        createApp(APP).mount('#app');
+    </script>
+</body>
+
+<html>

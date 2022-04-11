@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
+    <title>简易版的Vue3 TodoList</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <el-input style="width:300px;margin-right:15px;" placeholder="请输入代办事项" v-model="inputValue"
+                @input="handleInputChange"></el-input>
+            <!-- <input :value="inputValue" @input="handleInputChange" /> -->
+            <el-button type="primary" @click="handleClick">新增</el-button>
+            <hr>
+            <h2>待办事项数据列</h2>
+            <ul>
+                <li v-for="(item, index) in list" :key="index">
+                    {{ item.content }}
+                </li>
+            </ul>
+
+            <hr>
+            <el-table :data="list" border style="width: 100%" @selection-change="handleSelectionChange">
+                <el-table-column prop="content" label="待办事项" width="180">
+                </el-table-column>
+            </el-table>
+        </div>
+
+    </div>
+
+    <script>
+        //文本框相关逻辑
+        const useInputEffect = () => {
+            const { ref } = Vue;
+            const inputValue = ref("");
+            const handleInputChange = (e) => {
+                inputValue.value = e
+            }
+            return {
+                inputValue,
+                handleInputChange
+            }
+        }
+        //待办事项列表相关逻辑
+        const userListEffect = () => {
+            const { reactive } = Vue;
+            //定义代办事项数据
+            const list = reactive([
+                {
+                    content: "Vue2"
+                },
+                {
+                    content: "SpringBoot"
+                },
+            ])
+            const handleAddItem = (item) => {
+                list.push({
+                    content: item.value
+                })
+                // list.push(item.value); //向列表中加入待办事项
+                item.value = ""
+            }
+            return {
+                list,
+                handleAddItem
+            }
+        }
+        const { createApp } = Vue;
+        const App = Vue.createApp({
+            setup() {
+                const { inputValue, handleInputChange } = useInputEffect();
+                const { list, handleAddItem } = userListEffect();
+
+                const handleClick = () => {
+                    handleAddItem(inputValue)
+                }
+
+                return {
+                    inputValue,
+                    handleInputChange,
+                    list,
+                    handleClick,
+                    handleAddItem
+                };
+            },
+            // template: `
+            //   <div>
+            //     <input :value="inputValue" @input="handleInputChange" />
+            //   </div>
+            // `
+        });
+        App.use(ElementPlus)
+        const vm = App.mount('#app');
+    </script>
+</body>
+
+<html>

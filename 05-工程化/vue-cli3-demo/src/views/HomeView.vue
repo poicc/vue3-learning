@@ -7,9 +7,11 @@
 </template>
 
 <script>
-import  caculateTimeago  from "@/utils/time.js";
+// import  caculateTimeago  from "@/utils/time.js";
 import Item from "@/components/Item";
 import axios from "axios";
+let moment = require("moment") // 引入
+moment.locale("zh-cn")
 export default {
   name: "HomeView",
   components: {
@@ -33,7 +35,7 @@ export default {
         .then((res) => {
           console.log(res);
           res.data.forEach(item => {
-            item.updated = caculateTimeago(item.updated)
+            item.updated = moment(item.updated).fromNow()
           });
           this.itemList = res.data;
         })

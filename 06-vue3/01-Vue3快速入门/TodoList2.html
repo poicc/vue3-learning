@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <title>简易版 Vue TodoList</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        hr {
+            border: 1px dashed #ccc;
+        }
+    </style>
+    <title>简易版 Vue3 TodoList</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <h3>Vue3 + Element Plus 实现的简易版 TodoList</h3>
+            <el-input v-model="inputValue" placeholder="请输入代办事项" style="width: 150px; margin-right: 10px"></el-input>
+            <el-button type="primary" @click="handleClick">新增</el-button>
+            <el-input v-model="searchValue" placeholder="请输入事项名称" style="width: 150px; margin-left: 10px"></el-input>
+            <el-button type="success" style="margin-left: 10px" @click="handleSearch">搜索</el-button>
+            <hr />
+
+            <el-table :data="list" border style="width: 450px;margin-top:20px;"
+                @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="50"></el-table-column>
+                <el-table-column prop="content" label="待办事项" width="400"></el-table-column>
+            </el-table>
+
+            <div style="margin-top: 20px">
+                <el-button type="danger" @click="deleteSelectedItem">删除</el-button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //文本框相关逻辑
+        const useInputEffect = () => {
+            const { ref } = Vue;
+            const inputValue = ref("");
+            const handleInputChange = (newValue) => {
+                inputValue.value = newValue; //newValue就是用户输入的值
+            };
+            return {
+                inputValue,
+                handleInputChange,
+            };
+        };
+
+        //待办事项列表相关逻辑
+        const useListEffect = () => {
+            let itemId = 0;
+            const { reactive, toRefs } = Vue;
+            let listObj = reactive({ list: [] }); //用来存所有的代办事项
+            let { list } = toRefs(listObj);
+            let muiltipleSelection = reactive([]); //存选中的待办事项
+            const handleAddItem = (item) => {
+                listObj.list.push({
+                    id: ++itemId,
+                    content: item.value,
+                }); //向列表中阿计入待办事项
+                item.value = ""; //清空文本框
+            };
+
+            //处理复选框被选中事件
+            //var 为选中的复选框
+            const handleSelectionChange = (val) => {
+                muiltipleSelection = val;
+            };
+
+            //删除选中的代办事项
+            const deleteSelectedItem = () => {
+                let list = listObj.list;
+                if (muiltipleSelection.length === 0) {
+                    alert("未选择任何待办事项");
+                    return;
+                }
+                muiltipleSelection.forEach((selectedItem) => {
+                    list = list.filter((listItem) => listItem.id != selectedItem.id);
+                });
+                listObj.list = list;
+            };
+
+            //搜索相关逻辑
+            const { ref } = Vue;
+            const searchValue = ref("");
+            const handleSearchChange = (e) => {
+                let newValue = e._value
+                let list = listObj.list;
+                list = list.filter(item =>
+                    item.content.indexOf(newValue) != -1
+                )
+                console.log
+                listObj.list = list;
+            };
+
+
+            return {
+                list,
+                handleAddItem,
+                handleSelectionChange,
+                deleteSelectedItem,
+                searchValue,
+                handleSearchChange
+            };
+        };
+
+
+
+
+
+        //App相关逻辑
+        const App = Vue.createApp({
+            setup() {
+                //setup函数只做流程中转,引用定义好的数据和函数，并导出给模板使用
+                const { inputValue, handleInputChange } = useInputEffect();
+                const {
+                    list,
+                    handleAddItem,
+                    handleSelectionChange,
+                    deleteSelectedItem,
+                    searchValue,
+                    handleSearchChange
+                } = useListEffect();
+
+                const handleSearch = () => {
+                    handleSearchChange(searchValue)
+                }
+
+                const handleClick = () => {
+                    handleAddItem(inputValue);
+                };
+
+                return {
+                    inputValue,
+                    list,
+                    handleInputChange,
+                    handleClick,
+                    handleAddItem,
+                    handleSelectionChange,
+                    deleteSelectedItem,
+                    handleSearchChange,
+                    searchValue,
+                    handleSearch
+                };
+            },
+        });
+        App.use(ElementPlus);
+        const vm = App.mount("#app");
+    </script>
+</body>
+
+</html>
