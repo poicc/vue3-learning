@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios';
+
 
 //使用Vuex
 Vue.use(Vuex);
@@ -67,10 +69,16 @@ const store = new Vuex.Store({
         // 结合Primise
         submitActions(context, payload) {
             return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    context.commit('submitMutations')
-                    resolve("异步操作完成" + payload)
-                }, 1000);
+                axios.get("https://picsum.photos/1920/1080?random").then(res => {
+                    console.log(res)
+                    resolve("异步操作完成" + res.data)
+                }).catch((res) => {
+                    reject("异步操作异常" + res)
+                })
+                // setTimeout(() => {
+                //     context.commit('submitMutations')
+                //     resolve("异步操作完成" + payload)
+                // }, 1000);
             })
         },
 

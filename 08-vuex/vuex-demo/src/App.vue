@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <!-- <vuex-cpn-one></vuex-cpn-one>
-    <vuex-cpn-two></vuex-cpn-two> -->
+    <vuex-cpn-one></vuex-cpn-one>
+    <vuex-cpn-two></vuex-cpn-two>
+    <hr>
     <vuex-cpn-three></vuex-cpn-three>
     <vuex-cpn-four></vuex-cpn-four>
   </div>
