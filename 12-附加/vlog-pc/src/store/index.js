@@ -4,9 +4,24 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    loginStatus: false,
+    user: {}
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    //登录成功后 将用户数据存入
+    login(state,user) {
+      state.loginStatus = true
+      state.user = user
+      localStorage.setItem('user',JSON.stringify(user))
+    },
+    logout(state) {
+      state.loginStatus = false
+      state.user = {}
+      localStorage.removeItem('user')
+    }
+  },
   actions: {},
   modules: {},
 });

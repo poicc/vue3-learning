@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h2>layout</h2>
+    <h2>新闻</h2>
   </div>
 </template>
 
 <script>
 export default {
-    name: "Layout"
+    name: "News"
 }
 </script>
 
