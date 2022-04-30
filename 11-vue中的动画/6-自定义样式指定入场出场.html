@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义样式指定入场出场</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<style>
+    @keyframes in {
+        0% {
+            transform: translateX(-100px);
+        }
+
+        50% {
+            transform: translateX(-50px);
+        }
+
+        100% {
+            transform: translateX(50px);
+        }
+    }
+
+    @keyframes out {
+        0% {
+            transform: translateX(50px);
+        }
+
+        50% {
+            transform: translateX(-50px);
+        }
+
+        100% {
+            transform: translateX(-100px);
+        }
+    }
+
+    .in {
+        animation: in 3s;
+    }
+
+    .out {
+        animation: out 3s;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- 默认动画  v- -->
+        <button @click="handleClick">切换</button>
+        <transition enter-active-class="animate__animated animated__slideInLeft " leave-active-class="out">
+            <h2 v-if="show">Hello World</h2>
+        </transition>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data () {
+                return {
+                    show: false
+                }
+            },
+            methods: {
+                handleClick () {
+                    this.show = !this.show
+
+                }
+            },
+
+        })
+        const vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

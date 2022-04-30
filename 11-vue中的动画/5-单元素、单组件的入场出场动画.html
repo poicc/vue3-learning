@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单元素、单组件的入场出场动画</title>
+</head>
+<style>
+    @keyframes move {
+        0% {
+            transform: translateX(0px);
+        }
+
+        50% {
+            transform: translateX(100px);
+        }
+
+        100% {
+            transform: translateX(0px);
+        }
+    }
+
+    .v-enter-active,
+    .v-leave-leave {
+        animation: move 2s;
+    }
+
+    .hello-enter-active,
+    .hello-leave-leave {
+        animation: move 2s;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- 默认动画  v- -->
+        <button @click="handleClick">切换</button>
+        <transition>
+            <h2 v-if="show">Hello World</h2>
+        </transition>
+        <!-- 自定义 -->
+        <transition name="hello">
+            <h2 v-if="show">Hello World</h2>
+        </transition>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data () {
+                return {
+                    show: false
+                }
+            },
+            methods: {
+                handleClick () {
+                    this.show = !this.show
+
+                }
+            },
+
+        })
+        const vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

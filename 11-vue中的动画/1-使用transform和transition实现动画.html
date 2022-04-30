@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用transform和transition实现过渡动画</title>
+</head>
+<style>
+    .div1 {
+        width: 160px;
+        background-color: rosybrown;
+        cursor: pointer;
+        /* transition: all 2s; */
+        transition: width 1s line
+    }
+
+    .div1:hover {
+        width: 260px;
+        background-color: chocolate;
+    }
+
+
+    .div2 {
+        font-size: 32px;
+        cursor: pointer;
+        transition-property: font-size;
+        transition-delay: 1s;
+        transition-duration: 3s;
+
+    }
+
+    .div2:hover {
+        font-size: 88px;
+    }
+
+    .div3 {
+        display: block;
+        width: 100px;
+        height: 100px;
+        background-color: mediumturquoise;
+        cursor: pointer;
+        transition: width 2s, height 2s, background-color 2s, transform 2s;
+
+
+    }
+
+    .div3:hover {
+        width: 200px;
+        height: 200px;
+        background-color: lightsalmon;
+        transform: rotate(180deg);
+
+    }
+</style>
+
+<body>
+    <div class="div1">
+        宽度和背景过渡
+    </div>
+    <div class="div2">
+        字体变大过渡
+    </div>
+    <div class="div3">反转动画</div>
+
+</body>
+
+</html>

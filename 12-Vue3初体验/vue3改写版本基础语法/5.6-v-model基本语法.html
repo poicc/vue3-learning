@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-model</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="message" />
+        <h2>输入的内容是{{message}}</h2>
+        <hr />
+        <!-- 等价写法 -->
+        <input type="text" :value="info" @input="setInfo($event)" />
+        <h2>输入的内容是{{info}}</h2>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp, ref } = Vue;
+        const App = {
+            setup() {
+                const message = ref('')
+                const info = ref('')
+                const setInfo = ((event) => {
+                    info.value = event.target.value
+                })
+                return {
+                    message,
+                    info,
+                    setInfo
+                }
+            }
+        }
+        createApp(App).mount('#app')
+    </script>
+</body>
+
+<html>

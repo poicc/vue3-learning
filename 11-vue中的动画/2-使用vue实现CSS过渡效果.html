@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用vue实现CSS过渡效果</title>
+</head>
+<style>
+    .guodu {
+        transition: 3s background-color ease;
+    }
+
+    .orange {
+        background-color: orange;
+    }
+
+    .green {
+        background: green;
+    }
+</style>
+
+
+<body>
+    <div id="app">
+        <!-- 使用transition 和 :class 动态样式绑定实现过渡 -->
+        <button @click="handleClick1">切换</button>
+        <h2 :class="animate">Hello World</h2>
+        <hr />
+        <!-- 使用transition 和:style动态样式绑定实现过渡 -->
+        <button @click="handleClick2">切换</button>
+        <h2 :style="styleObj">Hello World</h2>
+        <hr />
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data () {
+                return {
+
+                    animate: {
+                        guodu: true,
+                        orange: true,
+                        green: false
+                    },
+                    styleObj: {
+                        background: "orange",
+                        fontSize: 36 + "px",
+                        transition: 3 + "s,background-colorm ease"
+
+                    }
+
+                }
+            },
+            methods: {
+                handleClick1 () {
+
+                    this.animate.orange = !this.animate.orange
+                    this.animate.green = !this.animate.green
+                },
+                handleClick2 () {
+                    if (this.styleObj.background === "orange") {
+                        this.styleObj.background = "green"
+                    } else {
+                        this.styleObj.background = "orange"
+                    }
+                }
+            },
+
+        })
+        const vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todolist-动态class绑定</title>
+    <style>
+        .text {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div>
+            <input v-model="inputValue" />
+            <button @click="handleAddItem">增加</button>
+            <ul>
+                <li v-for="(item,index) in list">
+                    <span :class="{text: item.isFinish}" @click="item.isFinis=!item.isFinish">{{item.title}}</span>
+                    <!-- <button @click="changeFin(index)">完成</button> -->
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp, ref } = Vue;
+        const App = {
+            setup() {
+                const inputValue = ref('')
+                const list = ref([
+                    {
+                        title: 'java',
+                        isFinish: false
+                    },
+                    {
+                        title: 'js',
+                        isFinish: false
+                    },
+                    {
+                        title: 'css',
+                        isFinish: false
+                    }
+                ])
+                const handleAddItem = (() => {
+                    let obj = {
+                        title: inputValue.value,
+                        isFinish: false
+                    }
+                    list.value.push(obj)
+                })
+                return {
+                    inputValue,
+                    list,
+                    handleAddItem
+                }
+            }
+        }
+        createApp(App).mount('#root')
+    </script>
+</body>
+
+</html>

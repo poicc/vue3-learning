@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单元素、单组件的入场出场过渡</title>
+</head>
+<style>
+    /* 入场动画 */
+    /* 开始 */
+    .v-enter-from {
+        opacity: 0;
+    }
+
+    /* 入场动画过程 规则！ 
+    2秒内完成透明度0到1的变化*/
+    .v-enter-active,
+    .v-leave-active {
+        transition: opacity 2s ease-out;
+    }
+
+    /* 结束 */
+    .v-enter-to {
+        opacity: 1;
+    }
+
+    /* 出场动画 */
+    /* 开始 */
+    /* .v-leave-from {
+        opacity: 1;
+    } */
+
+    /* 入场动画过程 规则！ */
+    /* .v-leave-active {
+        transition: opacity 2s ease-out;
+    } */
+
+    /* 结束 */
+    .v-leave-to {
+        opacity: 0;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <button @click="handleClick">切换</button>
+        <transition>
+            <h2 v-if="show">Hello World</h2>
+        </transition>
+
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data () {
+                return {
+                    show: false
+                }
+            },
+            methods: {
+                handleClick () {
+                    this.show = !this.show
+
+                }
+            },
+
+        })
+        const vm = app.mount('#app');
+    </script>
+</body>
+
+<html>

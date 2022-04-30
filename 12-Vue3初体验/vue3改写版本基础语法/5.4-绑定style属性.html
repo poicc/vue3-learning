@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绑定style属性</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2 :style="{'color':'red','font-size':data.fontSize+'px'}">绑定style属性红色h2</h2>
+        <button @click="addFontSize">增大字体</button>
+        <hr />
+        <h2 :style="[data.style1,data.style2]"></h2>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp, reactive } = Vue;
+        const App = {
+            setup() {
+                const data = reactive({
+                    fontSize: 20,
+                    style1: {
+                        color: "red",
+                        "font-size": "40px"
+                    },
+                    style2: {
+                        backgrountColoe: "red",
+                        "font-size": "40px"
+                    }
+                })
+                const addFontSize = (() => {
+                    data.fontSize++;
+                })
+                return {
+                    data,
+                    addFontSize
+                }
+            }
+        }
+        createApp(App).mount('#app')
+    </script>
+</body>
+
+<html>
